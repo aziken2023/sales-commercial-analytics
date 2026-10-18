@@ -85,8 +85,6 @@ The report contains six pages:
 
 ### Dashboard Screenshots
 
-> Add your Power BI screenshots to the `images/` folder using the filenames below. GitHub will then display them directly in this README.
-
 #### Executive Overview
 ![Executive Overview dashboard](images/executive-overview.png)
 
