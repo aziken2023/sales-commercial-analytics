@@ -1,3 +1,0 @@
-CREATE DATABASE sales_commercial_analytics;
-
-USE sales_commercial_analytics;
