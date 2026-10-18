@@ -1,65 +1,56 @@
-# Sales Commercial Analytics | B2B Sales Performance
+# Sales Commercial Analytics | Python & Power BI
 
 ## Project Overview
 
-This project examines a B2B technology company's sales pipeline to understand how effectively sales opportunities are converted into recorded Won value and where performance differs across products, sales agents, customers and regions.
+This project analyses a B2B sales pipeline to understand how effectively opportunities are converted into recorded won value, which products and sales agents contribute most, and how performance varies across accounts, customer sectors, and regional teams.
 
-The analysis combines exploratory data analysis in **Python (Pandas)** with an interactive **Power BI** report. Its purpose is to move beyond headline sales figures and identify practical questions management can investigate to improve pipeline follow-up and commercial decision-making.
+I used **Python (Pandas)** to explore and analyse the data, then developed a **six-page Power BI report** to communicate the findings and provide recommendations for sales management.
 
-> **Core business question:** How effectively is the company converting its sales pipeline into recorded Won value, and what factors are associated with stronger or weaker sales performance?
+## Business Problem
 
-## Business Objectives
+**How effectively is the company converting its sales pipeline into won deals, and which products, people, customers, and regions are associated with stronger sales outcomes?**
 
-- Assess pipeline health, including open opportunities and the closed-deal win rate.
-- Compare product performance by Won opportunities, total Won value, average Won deal value and win rate.
-- Evaluate sales agents using multiple measures rather than a single ranking.
-- Identify high-value customer accounts and compare customer sectors.
-- Examine regional and sales-manager performance.
-- Translate descriptive findings into management recommendations, while acknowledging data limitations.
+The analysis addresses these questions:
 
-## Dataset
-
-The analysis uses five related CSV files:
-
-| File | Description |
-| --- | --- |
-| `sales_pipeline.csv` | Opportunity-level sales data, including stage, product, sales agent, account, dates and close value. |
-| `sales_teams.csv` | Sales agents, their managers and regional offices. |
-| `accounts.csv` | Account characteristics, including sector, employees, revenue and office location. |
-| `products.csv` | Product reference information, including series and sales price. |
-| `data_dictionary.csv` | Definitions of dataset fields. |
-
-The main pipeline dataset contains **8,800 opportunities**. Its deal stages are Won, Lost, Engaging and Prospecting.
-
-**Data relationships:** The pipeline connects to sales-team information through `sales_agent` and to account information through `account`.
+- What is the distribution of won, lost, and open opportunities?
+- Which products generate the most recorded won value?
+- How do sales agents compare in deal volume, value, average deal size, and closed win rate?
+- Which customer accounts and sectors contribute most?
+- How does performance differ across regional offices and sales managers?
+- Where should management focus further investigation or follow-up?
 
 ## Tools and Skills
 
-- **Python and Pandas:** data exploration, missing-value investigation, filtering, grouping, aggregation and business metric calculations.
-- **Power BI:** data modelling, table relationships, DAX measures, KPI cards, interactive charts and report design.
-- **Analytical communication:** interpreting findings, developing recommendations and communicating limitations.
+- **Python / Pandas:** data exploration, missing-value analysis, filtering, aggregation, grouping, merging, and KPI calculations
+- **Jupyter Notebook:** reproducible exploratory analysis
+- **Power BI:** data modelling, table relationships, DAX measures, interactive visuals, and dashboard design
+- **Business analysis:** interpreting KPIs, comparing performance, identifying limitations, and making evidence-based recommendations
 
-SQL exploration was started but not included as a completed analytical component because the initial MySQL CSV import omitted open opportunities. The Power BI report uses the original CSV data.
+## Data
+
+The project uses five related CSV files:
+
+| File | Description |
+| --- | --- |
+| `sales_pipeline.csv` | Sales opportunities, agents, products, deal stages, dates, and close values |
+| `sales_teams.csv` | Sales agents, managers, and regional offices |
+| `accounts.csv` | Customer accounts, sectors, company size, and office locations |
+| `products.csv` | Product information and prices |
+| `data_dictionary.csv` | Field descriptions |
+
+The main sales pipeline contains **8,800 opportunities**. The account and sales team tables were linked to the pipeline to analyse performance across business dimensions.
 
 ## Analytical Approach
 
-1. **Understand the data:** inspect columns, deal stages, row counts and the meanings of missing values.
-2. **Check data quality:** distinguish genuinely incomplete records from opportunities that are still open.
-3. **Define business metrics:** calculate Won and Lost counts, open opportunities, closed win rate, recorded Won value and average Won deal value.
-4. **Compare performance:** analyse products, sales agents, accounts, customer sectors, regional offices and managers.
-5. **Build the dashboard:** present the metrics in Power BI and conclude with management insights and recommendations.
-
-The **closed win rate** is defined as:
-
-\[
-\text{Closed Win Rate} = \frac{\text{Won Opportunities}}{\text{Won Opportunities + Lost Opportunities}} \times 100
-\]
-
-Open opportunities are excluded from this denominator.
+1. Inspected dataset structure, data types, and missing values.
+2. Investigated missing fields by deal stage to understand whether blanks were expected.
+3. Calculated pipeline metrics, including won/lost/open counts, closed win rate, recorded won value, and average won deal value.
+4. Compared products, agents, accounts, sectors, regions, and managers using Pandas.
+5. Loaded the source CSV files into Power BI and created relationships between the relevant tables.
+6. Built DAX measures and visualisations to communicate results.
+7. Summarised key insights, follow-up questions, recommendations, and limitations.
 
 ## Key Findings
-
-### 1. Pipeline Health
 
 | Metric | Result |
 | --- | ---: |
@@ -68,75 +59,71 @@ Open opportunities are excluded from this denominator.
 | Lost opportunities | 2,473 |
 | Open opportunities | 2,089 |
 | Closed win rate | 63.15% |
-| Recorded Won value | £10,005,534 |
-| Average Won deal value | £2,360.91 |
+| Recorded won value | £10,005,534 |
+| Average won deal value | £2,360.91 |
 
-Of the **2,089 open opportunities**, **1,589** are in the Engaging stage and **500** are in Prospecting. These records warrant follow-up investigation, but the available data does not establish which opportunities are overdue or likely to close.
+**Pipeline health:** Of the 2,089 open opportunities, **1,589** are in the *Engaging* stage. These opportunities warrant further review, although the dataset does not establish how long they have been in that stage.
 
-### 2. Product Performance
+**Product performance:** **GTXPro** contributes approximately **35.1%** of recorded won value (£3.51M). **GTX Basic** has the highest number of won opportunities (915). **GTK 500** has the highest average won deal value, but this is based on only 15 won opportunities.
 
-**GTXPro** contributed approximately **£3.51 million**, representing **35.1%** of recorded Won value. **GTX Plus Pro** contributed approximately **£2.63 million**, followed by **MG Advanced** at approximately **£2.22 million**.
+**Sales performance:** **Darcel Schlecht** has the highest recorded won value (approximately **£1.15M**) and the most won opportunities (349). Different agents lead on other metrics, showing why performance should not be judged by total value alone.
 
-**GTX Basic** had the highest number of Won opportunities (**915**), illustrating the difference between sales volume and total value. **MG Special** had a relatively high closed win rate (approximately **64.84%**) but contributed only around **£43,768** in Won value. **GTK 500** had the highest average Won deal value (approximately **£26,707**), but this is based on only **15** Won opportunities and should be interpreted cautiously.
+**Customer performance:** **Kan-code** contributes the highest recorded won value among customer accounts (£341,455). The top five accounts collectively contribute approximately **12.1%** of recorded won value.
 
-### 3. Sales Agent Performance
-
-**Darcel Schlecht** led in both Won opportunities (**349**) and recorded Won value (approximately **£1.15 million**). However, rankings differ when comparing win rate, deal volume and average deal size. For example, **Elease Gluck** had the highest average Won deal value (approximately **£3,615**), while **Hayden Neloms** had one of the highest closed win rates (approximately **70.39%**).
-
-These results show why salesperson performance should be assessed using several complementary measures.
-
-### 4. Customer and Sector Performance
-
-**Kan-code** generated the highest recorded Won value among accounts (approximately **£341,455**). The top five accounts contributed approximately **12.1%** of all recorded Won value.
-
-Among customer sectors, **retail** had the highest recorded Won value (approximately **£947,251**), followed by the sector labelled **`technolgy`** in the source data (approximately **£744,937**) and **medical** (approximately **£698,749**). The source-data spelling is retained here for transparency.
-
-### 5. Regional and Manager Performance
-
-| Region | Won opportunities | Recorded Won value | Average Won deal value |
-| --- | ---: | ---: | ---: |
-| Central | 1,629 | £3,346,293 | £2,054.20 |
-| East | 1,171 | £3,090,594 | £2,639.28 |
-| West | 1,438 | £3,568,647 | £2,481.67 |
-
-**West** generated the highest recorded Won value, **Central** had the most Won opportunities and **East** had the highest average Won deal value. This suggests that regional comparisons should consider both volume and deal size.
-
-Among managers, **Melvin Marxen** led in Won opportunities and total recorded Won value, while **Rocco Neubert** had the highest average Won deal value.
+**Regional performance:** The **West** office has the highest recorded won value (approximately **£3.57M**); **Central** has the most won opportunities (1,629); and **East** has the highest average won deal value (approximately **£2,639**).
 
 ## Power BI Dashboard
 
 The report contains six pages:
 
-1. **Executive Overview** — headline KPIs, deal-stage distribution, open pipeline, product value and leading sales agents.
-2. **Product Performance** — Won volume, recorded Won value, average Won deal value, win rate and customer office-location distribution.
-3. **Sales Performance** — comparisons of sales agents by Won volume, value, average deal size and closed win rate.
-4. **Account Performance** — customer accounts and sector-level performance.
-5. **Regional and Manager Performance** — regional and manager comparisons.
-6. **Business Insights & Recommendations** — key findings, recommended next steps and data limitations.
+1. **Executive Overview** — pipeline KPIs, deal stages, open opportunities, and major value contributors
+2. **Product Performance** — product volume, win rate, average won deal value, and total won value
+3. **Sales Performance** — agent comparisons across won volume, won value, average deal size, and closed win rate
+4. **Account Performance** — customer accounts and sector comparisons
+5. **Regional and Manager Performance** — regional offices and sales manager comparisons
+6. **Business Insights & Recommendations** — management summary, follow-up priorities, and data limitations
 
-*Dashboard screenshots can be added here when publishing the repository.*
+### Dashboard Screenshots
+
+> Add your Power BI screenshots to the `images/` folder using the filenames below. GitHub will then display them directly in this README.
+
+#### Executive Overview
+![Executive Overview dashboard](images/executive-overview.png)
+
+#### Product Performance
+![Product Performance dashboard](images/product-performance.png)
+
+#### Sales Performance
+![Sales Performance dashboard](images/sales-performance.png)
+
+#### Account Performance
+![Account Performance dashboard](images/account-performance.png)
+
+#### Regional and Manager Performance
+![Regional and Manager Performance dashboard](images/regional-manager-performance.png)
+
+#### Business Insights & Recommendations
+![Business Insights and Recommendations dashboard](images/business-insights-recommendations.png)
 
 ## Management Recommendations
 
-1. **Review the open pipeline:** Prioritise investigation of the 2,089 open opportunities, especially those in Engaging, and identify which need timely follow-up.
-2. **Investigate high-value products:** Explore what drives GTXPro's contribution, including product mix, customer demand and sales practices.
-3. **Evaluate agents fairly:** Compare closed win rate, Won volume, average deal value and total Won value together instead of relying on one measure.
-4. **Understand regional differences:** Investigate product and customer mix before drawing conclusions about regional effectiveness or reallocating resources.
-5. **Improve data quality:** Review missing account information and standardise inconsistent category labels to support more reliable reporting.
+1. **Review open opportunities:** Prioritise follow-up on open deals, especially those in the Engaging stage, using additional information such as deal age and recent contact activity where available.
+2. **Investigate high-value product performance:** Examine why GTXPro contributes a large share of recorded won value and whether the drivers are repeatable.
+3. **Evaluate sales agents using multiple KPIs:** Consider win rate, deal volume, total won value, and average won deal value together rather than relying on one ranking.
+4. **Explore regional differences:** Compare product mix, opportunity volume, and deal size before making staffing or resource-allocation decisions.
 
 ## Data Limitations
 
-- **Snapshot rather than history:** The data provides current deal stages, not complete stage-transition histories. Stage-to-stage conversion rates and time spent in each stage cannot be established reliably.
-- **Open opportunities:** Missing `close_date` and `close_value` for Engaging and Prospecting opportunities are consistent with their open status and should not automatically be treated as errors.
-- **Missing account data:** Some opportunities have no account recorded, limiting account-level analysis.
-- **Recorded Won value is not necessarily realised revenue:** The dataset does not independently establish invoicing, cash collection or profit.
-- **Descriptive analysis:** Observed differences between products, people and regions do not establish causation.
-- **SQL import issue:** An attempted MySQL import retained only closed opportunities, so SQL results from that incomplete import were not used as the basis for the final dashboard.
+- The dataset provides **current deal stages**, not a full stage-change history; therefore, detailed stage-to-stage conversion or time-in-stage cannot be established.
+- **Recorded won value** should not automatically be treated as realised or collected revenue.
+- Some account information is missing, particularly for open opportunities.
+- Comparisons are descriptive; they do not prove that an agent, product, or region caused a particular outcome.
+- Results from very small groups, such as GTK 500's 15 won opportunities, should be interpreted cautiously.
 
-## Project Structure
+## Repository Structure
 
 ```text
-Sales Commercial Analytics/
+Sales-Commercial-Analytics/
 ├── data/
 │   ├── accounts.csv
 │   ├── data_dictionary.csv
@@ -145,15 +132,25 @@ Sales Commercial Analytics/
 │   └── sales_teams.csv
 ├── Notebook/
 │   └── 01_initial_exploration.ipynb
-├── SQL/
-│   └── 01_sales_analysis.sql
 ├── PowerBi/
 │   └── Sales_Commercial_Analytics.pbix
+├── images/
+│   ├── executive-overview.png
+│   ├── product-performance.png
+│   ├── sales-performance.png
+│   ├── account-performance.png
+│   ├── regional-manager-performance.png
+│   └── business-insights-recommendations.png
 └── README.md
 ```
 
-*Adjust filenames to match the files in your repository before publishing.*
+
+## How to Explore the Project
+
+1. Open the Jupyter notebook in `Notebook/` to review the Python exploration and analysis.
+2. Open the `.pbix` report in `PowerBi/` using Power BI Desktop to explore the visuals and measures.
+3. View the dashboard screenshots above for a quick overview of the completed report.
 
 ## Conclusion
 
-The project demonstrates how a sales dataset can be used to answer commercial questions through data preparation, KPI development, comparative analysis and dashboard reporting. The main lesson is that commercial performance cannot be judged by a single figure: deal volume, win rate and deal value each provide a different perspective. The resulting report offers a starting point for more targeted investigation and management decisions.
+This project demonstrates an end-to-end business analytics workflow: examining data quality, calculating performance metrics, connecting related datasets, developing Power BI dashboards, and translating results into practical management questions and recommendations.
